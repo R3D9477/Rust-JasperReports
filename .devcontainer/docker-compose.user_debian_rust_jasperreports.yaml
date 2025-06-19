@@ -1,0 +1,41 @@
+x-setup: &setup
+  image: rust-dev
+  build:
+    context: ..
+    dockerfile: ./.devcontainer/Dockerfile_debian_rust_jasperreports
+  stdin_open: true
+  tty: true
+  network_mode: host
+  environment:
+    - CONTAINER_CONTEXT_FOLDER=$PWD
+    - SSH_AUTH_SOCK=/ssh-agent
+  ulimits:
+    nofile:
+      soft: 1024
+      hard: 1024
+
+x-volume-build: &volume-build
+  type: bind
+  source: ../
+  target: /home/build/rsproject
+
+x-volume-ssh-agent: &volume-ssh-agent
+  type: bind
+  source: ${SSH_AUTH_SOCK:-/dev/null}
+  target: /ssh-agent
+
+x-volume-X11: &volume-X11
+  type: bind
+  source: /tmp/.X11-unix
+  target: /tmp/.X11-unix
+
+services:
+  build:
+    <<: *setup
+    volumes:
+      - <<: *volume-build
+      - <<: *volume-ssh-agent
+      - <<: *volume-X11
+#      - $HOME/.cargo:/home/build/.cargo
+    devices:
+      - /dev/dri:/dev/dri

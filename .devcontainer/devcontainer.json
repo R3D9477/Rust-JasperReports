@@ -1,0 +1,34 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/ubuntu
+{
+    "name": "${localWorkspaceFolderBasename}",
+    "service": "build",
+    "dockerComposeFile": "./docker-compose.user_debian_rust_jasperreports.yaml",
+    "workspaceFolder": "/home/build/rsproject",
+    "remoteUser": "build",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "rust-lang.rust-analyzer",
+                "vadimcn.vscode-lldb",
+                "tamasfe.even-better-toml",
+                "fill-labs.dependi",
+                "usernamehw.errorlens",
+                "edonet.vscode-command-runner",
+                "ryuta46.multi-command",
+                "krosf.vscode-valgrind",
+                "tintinweb.graphviz-interactive-preview",
+                "SR-team.vscode-autohide-fork",
+                "jiapeiyao.tab-group",
+                "hediet.vscode-drawio",
+                "rioj7.command-variable",
+                "seunlanlege.action-buttons",
+                "ArturoDent.launch-config"
+            ]
+        }
+    },
+    "containerEnv": {
+        "DISPLAY": ":0"
+    },
+    "postStartCommand": "sed -i 's/\r$//' .vscode/utils/*.sh ; .vscode/utils/project_init.sh"
+}

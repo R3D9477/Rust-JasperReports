@@ -1,0 +1,67 @@
+FROM debian:latest
+
+USER root
+
+RUN passwd --delete root
+
+RUN apt update -y
+RUN apt install pkg-config wget curl lsb-release build-essential software-properties-common gnupg git sudo nano valgrind python3 jq python3-venv procps -y
+
+# CREATE USER
+
+RUN groupadd build
+RUN useradd -rm -d /home/build -s /bin/bash -g root -G sudo -u 1001 build
+RUN echo "export USER=build" > /etc/profile.d/set_user.sh
+RUN passwd --delete build
+
+RUN usermod -a -G sudo build
+RUN usermod -a -G build build
+
+RUN mkdir -p "/home/build/rsproject"
+RUN chown build:build "/home/build/rsproject"
+
+USER build:build
+WORKDIR /home/build
+
+# INSTALL LIVEPROCMON DEPS
+
+RUN python3 -m venv /home/build/.local --system-site-packages
+ENV PATH="${PATH}:/home/build/.local/bin"
+
+RUN /home/build/.local/bin/pip install gprof2dot matplotlib pillow
+
+# INSTALL RUST
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > ./rustup.rs
+RUN chmod +x ./rustup.rs
+RUN ./rustup.rs -y
+
+# INSTALL JASPERREPORTS
+
+USER root
+
+RUN apt install default-jdk default-jre -y
+
+USER build:build
+WORKDIR /home/build
+
+RUN mkdir /home/build/jar_cache
+WORKDIR /home/build/jar_cache
+
+RUN wget https://repo1.maven.org/maven2/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar
+RUN wget https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.19.1/jackson-core-2.19.1.jar
+RUN wget https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.11.1/jackson-databind-2.11.1.jar
+RUN wget https://repo1.maven.org/maven2/com/fasterxml/jackson/dataformat/jackson-dataformat-xml/2.19.1/jackson-dataformat-xml-2.19.1.jar
+RUN wget https://repo1.maven.org/maven2/org/apache/xmlgraphics/batik-parser/1.19/batik-parser-1.19.jar
+RUN wget https://repo1.maven.org/maven2/org/apache/xmlgraphics/batik-gvt/1.9.1/batik-gvt-1.9.1.jar
+RUN wget https://repo1.maven.org/maven2/org/apache/xmlgraphics/batik-bridge/1.9.1/batik-bridge-1.9.1.jar
+RUN wget https://repo1.maven.org/maven2/commons-logging/commons-logging/1.3.5/commons-logging-1.3.5.jar
+RUN wget https://repo1.maven.org/maven2/org/apache/commons/commons-collections4/4.5.0-M1/commons-collections4-4.5.0-M1.jar
+RUN wget https://repo1.maven.org/maven2/com/github/librepdf/openpdf/1.3.32/openpdf-1.3.32.jar
+
+RUN wget https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-annotations/2.19.1/jackson-annotations-2.19.1.jar
+RUN wget https://repo1.maven.org/maven2/org/antlr/antlr-complete/3.5.3/antlr-complete-3.5.3.jar
+
+RUN wget -O "jasperreports-7.0.3.jar"       "https://sourceforge.net/projects/jasperreports/files/jasperreports/JasperReports%207.0.3/jasperreports-7.0.3.jar/download"
+RUN wget -O "jasperreports-pdf-7.0.3.jar"   "https://sourceforge.net/projects/jasperreports/files/jasperreports/JasperReports%207.0.3/jasperreports-pdf-7.0.3.jar/download"
+RUN wget -O "jasperreports-json-7.0.3.jar"  "https://sourceforge.net/projects/jasperreports/files/jasperreports/JasperReports%207.0.3/jasperreports-json-7.0.3.jar/download"

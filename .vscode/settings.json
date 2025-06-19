@@ -1,0 +1,161 @@
+{
+    "task.saveBeforeRun": "always",
+    "files.autoSave": "off",
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": false,
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.renderWhitespace": "trailing",
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "workbench.editor.showTabs": "single",
+    "workbench.editor.enablePreview": true,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#505050",
+        "statusBar.foreground": "#ffffff"
+    },
+    "multiCommand.commands": [
+        // editor
+        {
+            "command": "multiCommand.editor_unfoldAll",
+            "sequence": [
+                "workbench.action.focusActiveEditorGroup",
+                "editor.unfoldAll",
+            ],
+        },
+        {
+            "command": "multiCommand.editor_foldLevel1",
+            "sequence": [
+                "multiCommand.editor_unfoldAll",
+                "editor.foldLevel1",
+            ],
+        },
+        {
+            "command": "multiCommand.editor_foldLevel2",
+            "sequence": [
+                "multiCommand.editor_unfoldAll",
+                "editor.foldLevel2",
+            ],
+        },
+        {
+            "command": "multiCommand.editor_foldLevel3",
+            "sequence": [
+                "multiCommand.editor_unfoldAll",
+                "editor.foldLevel3"
+            ],
+        },
+        {
+            "command": "multiCommand.editor_foldLevel4",
+            "sequence": [
+                "multiCommand.editor_unfoldAll",
+                "editor.foldLevel4"
+            ],
+        },
+    ],
+    "actionButtons": {
+        "commands": [
+            {
+                "name": "     $(kebab-vertical)$(triangle-right)",
+                "command": ""
+            },
+            {
+                "name": "$(telescope)",
+                "tooltip": "LiveProcMon: Start Monitoring",
+                "command": "workbench.action.tasks.runTask",
+                "args": [
+                    "$(telescope) LiveProcMon: Start Monitoring"
+                ],
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(stop)",
+                "tooltip": "LiveProcMon: Stop Monitoring",
+                "command": "workbench.action.tasks.runTask",
+                "args": [
+                    "$(stop) LiveProcMon: Stop Monitoring"
+                ],
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(report)1",
+                "tooltip": "Valgrind: Show Memcheck Report",
+                "command": "workbench.action.tasks.runTask",
+                "args": [
+                    "$(report) Valgrind: Show Memcheck Report"
+                ],
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(report)2",
+                "tooltip": "Valgrind: Show Cachegrind Report",
+                "command": "workbench.action.tasks.runTask",
+                "args": [
+                    "$(report) Valgrind: Show Cachegrind Report"
+                ],
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(report)3",
+                "tooltip": "Valgrind: Show Callgrind Report",
+                "command": "workbench.action.tasks.runTask",
+                "args": [
+                    "$(report) Valgrind: Show Callgrind Report"
+                ],
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(folding-collapsed)4",
+                "tooltip": "Fold Level 4",
+                "command": "multiCommand.editor_foldLevel4",
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(folding-collapsed)3",
+                "tooltip": "Fold Level 3",
+                "command": "multiCommand.editor_foldLevel3",
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(folding-collapsed)2",
+                "tooltip": "Fold Level 2",
+                "command": "multiCommand.editor_foldLevel2",
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(folding-collapsed)1",
+                "tooltip": "Fold Level 1",
+                "command": "multiCommand.editor_foldLevel1",
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(folding-expanded)",
+                "tooltip": "Unfold All",
+                "command": "multiCommand.editor_unfoldAll",
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(terminal)",
+                "tooltip": "Toggle terminal",
+                "command": "workbench.action.terminal.toggleTerminal",
+                "useVsCodeApi": true,
+            },
+            {
+                "name": "$(triangle-left)$(kebab-vertical)     ",
+                "command": ""
+            },
+        ]
+    },
+    "graphviz-interactive-preview.openAutomatically": true,
+    "graphviz-interactive-preview.preserveFocus": true,
+    "autoHide.autoHideLeftSideBar": false,
+    "git.ignoreLimitWarning": true,
+    "LiveProcMon": {
+        "maxPoints": 3600,
+        "collectDelayMs": 123,
+        "generatePlotDelayMs": 789,
+        "updateFrequencyMs": 1234,
+        "plotWidthInch": 7.5,
+        "plotHeightInch": 8.5,
+    },
+}

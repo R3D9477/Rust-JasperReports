@@ -1,0 +1,21 @@
+// Suggested extensions
+{
+    "recommendations": [
+        "ms-vscode-remote.remote-containers",
+        "rust-lang.rust-analyzer",
+        "vadimcn.vscode-lldb",
+        "tamasfe.even-better-toml",
+        "fill-labs.dependi",
+        "usernamehw.errorlens",
+        "edonet.vscode-command-runner",
+        "ryuta46.multi-command",
+        "krosf.vscode-valgrind",
+        "tintinweb.graphviz-interactive-preview",
+        "SR-team.vscode-autohide-fork",
+        "jiapeiyao.tab-group",
+        "hediet.vscode-drawio",
+        "rioj7.command-variable",
+        "seunlanlege.action-buttons",
+        "ArturoDent.launch-config"
+    ]
+}

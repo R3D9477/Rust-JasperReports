@@ -1,0 +1,7 @@
+[package]
+name = "Rust-JasperReports"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+rsjrs = { path = 'rsjrs' }
